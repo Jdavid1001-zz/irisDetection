@@ -17,3 +17,13 @@ def processFile(fileName):
     print accumulator
     
 #processFile(filename)
+
+
+"""
+def processFile(fileName, minR, maxR):
+    circles = idh.getCircles(maxR)
+    img = idh.prepareImg(fileName, maxR)
+    edgesArr = getEdgesArr(img)
+    zeroedAccumulator = getAcc(img, minR, maxR)
+    center, radius = houghCircle(img, minR, maxR, edgesArr, circles, zeroedAccumulator)
+"""
