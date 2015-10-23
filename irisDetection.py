@@ -3,6 +3,7 @@
 import irisDetectionHelper as idh
 import cv2
 
+
 filename = '/Users/JuanDa/Documents/Academics/2015-2016/Fall/EECS 395 Biometrics/hw2/2008-03-11_13/04233/04233d1712.tiff'
 
 def processFile(fileName):
@@ -15,4 +16,4 @@ def processFile(fileName):
     accumulator = idh.processAcc(zeroedAccumulator, binImgOfEdges, arrOfEdges)
     print accumulator
     
-processFile(filename)
+#processFile(filename)
