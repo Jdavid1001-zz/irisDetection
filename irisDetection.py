@@ -20,10 +20,15 @@ def processFile(fileName):
 
 
 """
-def processFile(fileName, minR, maxR):
-    circles = idh.getCircles(maxR)
+def processFile(fileName, minR, maxR, circles):
     img = idh.prepareImg(fileName, maxR)
-    edgesArr = getEdgesArr(img)
+    edgesArr = getArrayOfEdges(img)
     zeroedAccumulator = getAcc(img, minR, maxR)
     center, radius = houghCircle(img, minR, maxR, edgesArr, circles, zeroedAccumulator)
+    return (center, radius)
+
+def processFolder(folderName, minR, maxR):
+    circles = idh.getCircles(maxR)
+    for each file in Folder:
+        processFile(fileName, minR, maxR, circles)
 """

@@ -49,15 +49,22 @@ def removeBorders(img, maxR):
     return zeroedMatrix + roi
 
 def prepareImg(fileName, maxR):
-    img = blackWhiteImage
-    edgeImg = cannyEdgeDetect
+    img = blackWhiteImage(fileName)
+    edgeImg = cannyEdgeDetect(img)
     return removeBorders(img, maxR)
     
     
+def getMaxCenterR(Accumulator):
+    find max r and max x,y in the accumulator
+    
 def houghCircle(img, minR, maxR, edgesArr, circles, acc):
     for center in edgesArr:
+        x0 = center[0] - r
+        x1 = center[0] + r
+        y0 = center[1] - r
+        y1 = center[1] + r
         for r in xrange(minR:maxR):
-            acc += circleMatrix(circles, r, center)
+            acc[r][x0:x1][y0:y1] += circles[r]
         
     return getMaxCenterR(acc)
 """
