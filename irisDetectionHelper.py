@@ -3,6 +3,14 @@ import cv2
 import cv2.cv as cv
 import numpy as np
 
+def translatedCircle(circleArrParams, dstRowCol):
+    r = circleArrParams[2]
+    relativeRow = circleArrParams[1]
+    relativeCol = circleArrParams[0]
+    newRow = dstRowCol[0] + relativeRow
+    newCol = dstRowCol[1] + relativeCol
+    return [newCol, newRow, r]
+
 def findIris(img):
     iris = findCircle(img, 60, 150, 80)
     return iris

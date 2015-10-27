@@ -15,7 +15,6 @@ def showImg(img, title):
     cv2.destroyAllWindows()
     return
 
-
 for filename in filenameArr:
     img = cv2.imread(filename, 0)
     
@@ -24,13 +23,11 @@ for filename in filenameArr:
     iris = idh.findIris(img)
     cimg = idh.drawCircle(cimg, iris)
 
-    roiForPupil, squareRowCol = idh.fromCircGetROI(img, iris)
-    
-    retval, roiForPupil = cv2.threshold(roiForPupil, 50, 255, cv2.THRESH_BINARY)
+
 
     pupil = idh.findPupil(roiForPupil)
-    cImgROI = cv2.cvtColor(roiForPupil, cv2.COLOR_GRAY2BGR)
-    cImgROI = idh.drawCircle(cImgROI, pupil)
+    dstPupil = translatedCircle(pupil, dstRowCol)
+    
+    cimg = idh.drawCircle(cimg, dstPupil)
         
     showImg(cimg, 'detected circles')
-    showImg(cImgROI,'detected pupil')
