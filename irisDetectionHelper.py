@@ -20,18 +20,40 @@ def findPupil(img):
     return pupil
 
 def findCircle(img,circleMinRadius,circleMaxRadius, minThreshold):
-    circles = cv2.HoughCircles(img,cv.CV_HOUGH_GRADIENT, 1, 20,
-                               param1= 50,param2= minThreshold, 
-                               minRadius= circleMinRadius, maxRadius= circleMaxRadius)        
-    print "Here are circles:"
-    print circles
+    circles = None
+    minRadiusOriginal = circleMinRadius
+    minThreshOriginal = minThreshold
+    reduceMinRadius = True
+    reduceMinThreshold = False
+    while circles is None:
+        circles = cv2.HoughCircles(img,cv.CV_HOUGH_GRADIENT, 1, 20,
+                                   param1= 50,param2= minThreshold, 
+                                   minRadius= circleMinRadius, maxRadius= circleMaxRadius)
+        if reduceMinRadius:                                   
+            circleMinRadius -= 5
+        if reduceMinThreshold:
+            minThreshold -= 5
+        if (reduceMinRadius and reduceMinThreshold) and (circleMinRadius <= 0 or minThreshold <= 0):
+            height, width = img.shape
+            x = height/2
+            y = width/2
+            r = min([height, width]) /4
+            return [int(i) for i in [x,y,r]]
+        if circleMinRadius <= 0:
+            reduceMinRadius = False
+            reduceMinThreshold = True
+            circleMinRadius = minRadiusOriginal
+        if minThreshold <= 0:
+            minThreshold = minThreshOriginal
+            reduceMinRadius = True
+
     minRadius = 0                           
     for i in range(len(circles[0])):
         if circles[0][i][2] > minRadius:
-            minRadius = int(round(circles[0][i][2]))
+            minRadius = circles[0][i][2]
             index = i
     
-    return np.around(circles[0][index])
+    return [int(i) for i in np.around(circles[0][index])]
 
 def drawCircle(coloredImg, circleArrParams):
     cv2.circle(coloredImg, (circleArrParams[0], circleArrParams[1]), 

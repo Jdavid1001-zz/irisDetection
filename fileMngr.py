@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-
+import cv2
 
 def getImgFileNames(folder):
     for nextfolder in os.listdir(folder):
@@ -13,4 +13,4 @@ def getFileName(outFolder, fileNum):
     
 def saveImage(img, outFolder, fileNum):
     fileName = getFileName(outFolder, fileNum)
-    saveimagefilename
+    cv2.imwrite(fileName,img)
