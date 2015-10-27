@@ -4,16 +4,19 @@ import cv2.cv as cv
 import numpy as np
 
 def findIris(img):
-    iris = findCircle(img,60,150)
+    iris = findCircle(img, 60, 150, 80)
     return iris
 
 def findPupil(img):
-    pupil = findCircle(img,10,100)
+    pupil = findCircle(img, 10, 50, 30)
     return pupil
 
-def findCircle(img,circleMinRadius,circleMaxRadius):
-    circles = cv2.HoughCircles(img,cv.CV_HOUGH_GRADIENT,1,20,
-                               param1=50,param2=80,minRadius=circleMinRadius,maxRadius=circleMaxRadius)        
+def findCircle(img,circleMinRadius,circleMaxRadius, minThreshold):
+    circles = cv2.HoughCircles(img,cv.CV_HOUGH_GRADIENT, 1, 20,
+                               param1=50,param2=minThreshold, 
+                               minRadius=circleMinRadius, maxRadius=circleMaxRadius)        
+    print "Here are circles:"
+    print circles
     minRadius = 0                           
     for i in range(len(circles[0])):
         if circles[0][i][2] > minRadius:

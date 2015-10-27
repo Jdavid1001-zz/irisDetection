@@ -24,6 +24,7 @@ def getFileName(outFolder, fileNum):
     
 def saveImage(img, outFolder, fileNum):
     fileName = getFileName(outFolder, fileNum)
+    #saveimagefilename
     
 
 def process(path, outFolder):

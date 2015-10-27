@@ -28,10 +28,10 @@ for filename in filenameArr:
 
     pupil = idh.findPupil(roiForPupil)
     
-    cImgROI = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+    cImgROI = cv2.cvtColor(roiForPupil, cv2.COLOR_GRAY2BGR)
     
     cImgROI = idh.drawCircle(cImgROI, pupil)
     
     
     showImg(cimg, 'detected circles')
-    showImg(cImgROI,'detected pupil or like region of interest pupil')
+    showImg(cImgROI,'detected pupil')
