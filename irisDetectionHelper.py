@@ -8,13 +8,13 @@ def findIris(img):
     return iris
 
 def findPupil(img):
-    pupil = findCircle(img, 10, 50, 30)
+    pupil = findCircle(img, 10, 120, 10)
     return pupil
 
 def findCircle(img,circleMinRadius,circleMaxRadius, minThreshold):
     circles = cv2.HoughCircles(img,cv.CV_HOUGH_GRADIENT, 1, 20,
-                               param1=50,param2=minThreshold, 
-                               minRadius=circleMinRadius, maxRadius=circleMaxRadius)        
+                               param1= 50,param2= minThreshold, 
+                               minRadius= circleMinRadius, maxRadius= circleMaxRadius)        
     print "Here are circles:"
     print circles
     minRadius = 0                           

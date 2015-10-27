@@ -25,13 +25,12 @@ for filename in filenameArr:
     cimg = idh.drawCircle(cimg, iris)
 
     roiForPupil, squareRowCol = idh.fromCircGetROI(img, iris)
+    
+    retval, roiForPupil = cv2.threshold(roiForPupil, 50, 255, cv2.THRESH_BINARY)
 
     pupil = idh.findPupil(roiForPupil)
-    
     cImgROI = cv2.cvtColor(roiForPupil, cv2.COLOR_GRAY2BGR)
-    
     cImgROI = idh.drawCircle(cImgROI, pupil)
-    
-    
+        
     showImg(cimg, 'detected circles')
     showImg(cImgROI,'detected pupil')
